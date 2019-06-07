@@ -43,6 +43,38 @@ class DoublyLinkedList:
             next_node.prev.next = new_node
 
         next_node.prev = new_node
+        
+    def sortedInsert(head, data):
+        node = DoublyLinkedListNode(data)
+        if head is None:
+            head = node
+            return head
+        else:
+            temp = head
+            if head.data > data:
+                node.next = head
+                head.prev = node
+                head = node
+                return head
+            while temp.next is not None:
+                if temp.data <= data:
+                    temp = temp.next
+                else:
+                    temp.prev.next = node
+                    node.prev = temp.prev
+                    node.next = temp
+                    temp.prev = node
+                    return head
+            if temp.next is None:
+                if temp.data <= data:
+                    temp.next = node
+                    node.prev = temp
+                else:
+                    temp.prev.next = node
+                    node.prev = temp.prev
+                    node.next = temp
+                    temp.prev = node
+                    return head
 
     def append(self, new_data):
         new_node = Node(new_data)
